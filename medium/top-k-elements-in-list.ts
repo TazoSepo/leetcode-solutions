@@ -5,9 +5,10 @@ class Solution {
    * @return {number[]}
    */
 
-  //greedy
+  // optimal
   topKFrequent(nums: number[], k: number): number[] {
     let map = new Map();
+    const freq: number[][] = Array.from({ length: nums.length + 1 }, () => []);
     for (let i = 0; i < nums.length; i++) {
       if (map.has(nums[i])) {
         map.set(nums[i], map.get(nums[i]) + 1);
@@ -16,11 +17,22 @@ class Solution {
       }
     }
 
-    const sortedMap = new Map([...map.entries()].sort((a, b) => b[1] - a[1]));
+    for (const [key, value] of map) {
+      freq[value].push(key);
+    }
 
-    const topK = [...sortedMap.keys()].slice(0, k);
+    let res = [];
 
-    return topK;
+    for (let i = freq.length - 1; i > 0; i--) {
+      if (freq[i].length) {
+        for (let j = 0; j < freq[i].length; j++) {
+          res.push(freq[i][j]);
+          if (res.length === k) return res;
+        }
+      }
+    }
+
+    return res;
   }
 }
 
