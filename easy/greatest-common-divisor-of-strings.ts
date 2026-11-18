@@ -4,13 +4,8 @@ function gcdOfStrings(str1: string, str2: string): string {
   }
 
   let num = gcd(str1.length, str2.length);
-  let res = "";
 
-  for (let i = 0; i < num; i++) {
-    res += str1[i];
-  }
-
-  return res;
+  return str1.slice(0, num);
 }
 
 function gcd(a: number, b: number): number {
