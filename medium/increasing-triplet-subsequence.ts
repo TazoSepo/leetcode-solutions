@@ -1,21 +1,15 @@
 function increasingTriplet(nums: number[]): boolean {
-  if (nums.length < 3) {
-    return false;
-  }
+  let i = Number.MAX_SAFE_INTEGER,
+    j = Number.MAX_SAFE_INTEGER;
 
-  let minInd = 0;
-  for (let i = 0; i < nums.length - 2; i++) {
-    if (nums[i] < nums[minInd]) minInd = i;
-  }
-
-  let counter = 1;
-
-  for (let i = minInd + 1; i < nums.length; i++) {
-    if (nums[i] > nums[minInd]) {
-      counter++;
-      minInd = i;
+  for (let num of nums) {
+    if (num <= i) {
+      i = num;
+    } else if (num <= j) {
+      j = num;
+    } else {
+      return true;
     }
-    if (counter === 3) return true;
   }
 
   return false;
