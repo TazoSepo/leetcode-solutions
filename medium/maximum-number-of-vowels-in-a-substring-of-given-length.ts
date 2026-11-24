@@ -7,6 +7,8 @@ function maxVowels(s: string, k: number): number {
     }
   }
 
+  if (maxCount === k) return k;
+
   let count = maxCount;
 
   for (let i = k; i < s.length; i++) {
@@ -20,7 +22,7 @@ function maxVowels(s: string, k: number): number {
 }
 
 function isVowel(char: string) {
-  return ["a", "e", "i", "o", "u"].includes(char);
+  return "aeiou".includes(char);
 }
 
 console.log(maxVowels("abciiidef", 3));
