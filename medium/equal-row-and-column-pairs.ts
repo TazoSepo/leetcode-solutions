@@ -4,25 +4,20 @@ function equalPairs(grid: number[][]): number {
   let map = new Map<string, number>();
 
   for (let i = 0; i < grid.length; i++) {
+    let row = grid[i].join(",");
+
+    map.set(row, (map.get(row) ?? 0) + 1);
+  }
+
+  for (let i = 0; i < grid.length; i++) {
     let column = "";
+
     for (let j = 0; j < grid.length; j++) {
       column += grid[j][i];
       if (j !== grid.length - 1) column += ",";
     }
-    let item = map.get(column);
 
-    item ? map.set(column, item + 1) : map.set(column, 1);
-  }
-
-  for (let i = 0; i < grid.length; i++) {
-    let row = "";
-
-    for (let j = 0; j < grid.length; j++) {
-      row += grid[i][j];
-      if (j !== grid.length - 1) row += ",";
-    }
-
-    let curr = map.get(row);
+    let curr = map.get(column);
 
     if (curr) counter += curr;
   }
